@@ -1,7 +1,13 @@
-const fio = prompt("Введите ваше ФИО", "Иванов Иван Иванович");
-const age = parseInt(prompt("Введите ваш возраст в годах", 20));
+let fio;
+do {
+    fio = prompt("Введите ФИО")
+} while (fio.length >= 30 || fio == "undefined")
+let age;
+do {
+    parseInt(age = prompt("Введите ваш возраст в годах"))
+} while (isNaN(age))
 const age2 = age * 365;
-const age3 = age + 5
+let age3 = parseInt(age) + 5
 let sex
 if (confirm("Ваш пол мужской")) {
     sex = "мужской"
@@ -10,11 +16,11 @@ if (confirm("Ваш пол мужской")) {
 }
 
 let pension
-if (age < 65) {
+age < 65 ?
     pension = "нет"
-} else {
+    :
     pension = "да"
-}
+
 
 const ljf = alert(
     `
