@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .sign {
+            margin: 2px 0px 0px 2px;
+
+        }
+
+        .number0 {
+            margin: 2px 0px 0px 27px;
+        }
+
+        .equal {
+            margin: 2px 0px 0px 1px;
+        }
+
+        .out {
+            border: black solid;
+            background-color: blueviolet;
+            margin-top: 660px;
+        }
+
+        .sign,
+        .number0,
+        .equal,
+        .out,
+        .but {
+            width: 60px;
+            height: 60px;
+            align-content: center;
+
+
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input class="but" type="button" value="7" onclick="getNumber(7)">
+    <input class="but" type="button" value="8" onclick="getNumber(8)">
+    <input class="but" type="button" value="9" onclick="getNumber(9)">
+    <input class="but" type="button" value="/" onclick="getSign('/')">
+    </br>
+    <input class="but" type="button" value="4" onclick="getNumber(4)">
+    <input class="but" type="button" value="5" onclick="getNumber(5)">
+    <input class="but" type="button" value="6" onclick="getNumber(6)">
+    <input class="but" type="button" value="*" onclick="getSign('*')">
+    </br>
+    <input class="but" type="button" value="1" onclick="getNumber(1)">
+    <input class="but" type="button" value="2" onclick="getNumber(2)">
+    <input class="but" type="button" value="3" onclick="getNumber(3)">
+    <input class="but" type="button" value="+" onclick="getSign('+')">
+    </br>
+    <input class="number0" type="button" value="0" onclick="getNumber(0)">
+    <input class="equal" type="button" value="=" onclick="getResult()">
+    <input class="sign" type="button" value="-" onclick="getSign('-')">
+
+
+    <script src="calc.js"></script>
+</body>
+
+</html>
