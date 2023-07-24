@@ -1,7 +1,8 @@
 let fio;
 do {
     fio = prompt("Введите ФИО")
-} while (fio.length >= 30 || fio == "undefined")
+} while (fio.length >= 30 || fio == "undefined" || fio.length < 1)
+
 let age;
 do {
     parseInt(age = prompt("Введите ваш возраст в годах"))
