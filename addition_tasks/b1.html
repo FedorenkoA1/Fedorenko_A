@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //         "B1+
+        // Разработать чистую функцию, получающую год, и возвращающую век, к которому относится данный год. 
+        // (Например, 1980 год — 20 век, 2000 год — 20 век, 2001 год — 21 век.) 
+        // Функция не должна использовать if либо условную операцию, только оператор return.
+        // Спросить у пользователя год.Отобразить пользователю соответствующий году век."
+        let getYear = Number(prompt("Введите год"));
+        function getCentury(getYear) {
+            function rounds(n, m) {
+                return Math.ceil(n / m);
+            }
+
+            return console.log("Это " + rounds(getYear, 100) + " век")
+
+        }
+        getCentury(getYear)
+
+
+
+    </script>
+</body>
+
+</html>
