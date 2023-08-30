@@ -22,21 +22,47 @@
         //  - разница между буквами ""е"" и ""ё"".
 
         function findPalindrom(str) {
-            let string = str.toLowerCase().trim().replaceAll(",", "").replaceAll(" ", "").replaceAll(".", "").
-                replaceAll("!", "").replaceAll("?", "").replaceAll(";", "").replaceAll(":", "").replaceAll("...", "")
-                .replaceAll("-", "").replaceAll("'", "").replaceAll("(", "").replaceAll(")", "")
-                .replaceAll("ь", "").replaceAll("ъ", "").replaceAll("е", "").replaceAll("ё", "");
+            let stringytoLower = str.toLowerCase()
+            const splited = stringytoLower.split("");
+            let stringy = "";
 
-            if (string.split("").reverse().join("") == string) {
+            function change(char) {
+                const dict = {
+                    "ё": "е",
+                    "ъ": "ь",
+                    " ": "",
+                    ",": "",
+                    ".": "",
+                    "!": "",
+                    ":": "",
+                    ";": "",
+                    "'": "",
+                    "-": "",
+                    "(": "",
+                    ")": "",
+                    "?": ""
+                };
+                if (char in dict) {
+                    return dict[char];
+                }
+                return char;
+            }
+
+            for (let x of splited) {
+                stringy += change(x);
+            }
+            console.log(stringy)
+            if (stringy.split("").reverse().join("") == stringy) {
                 return console.log("It is palindrom");
             } else {
-                console.log("It isn`t palindrom");
+                return console.log("It isn`t palindrom");
             }
 
         }
 
 
-        findPalindrom("Minim!ё")
+
+        findPalindrom("Minimь!")
 
 
 
