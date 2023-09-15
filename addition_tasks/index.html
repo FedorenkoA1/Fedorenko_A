@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+        </script>
+    <script>
+        const cars = [
+            {
+                id: '1',
+                title: 'BMW',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab accusantium corporis eum fugiat illum, incidunt ipsum laborum magnam nulla odit officia ratione sed temporibus vitae? Iusto maiores provident quos.',
+                price: '6550'
+            },
+            {
+                id: '2',
+                title: 'Audi',
+                description: 'A ab accusantium corporis eum fugiat illum, incidunt ipsum laborum magnam nulla odit officia ratione sed temporibus vitae? Iusto maiores provident quos.',
+                price: '5550'
+            },
+            {
+                id: '3',
+                title: 'Volvo',
+                description:
+                    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. incidunt ipsum laborum magnam nulla odit officia ratione sed temporibus vitae? Iusto maiores provident quos.',
+                price:
+                    '7550'
+            }
+
+        ];
+        const app = document.getElementById("app");
+        let htmlTags = "";
+        cars.forEach((item) => {
+            htmlTags += `<div class="card" style="width: 18rem;">
+  <img src="https://unsplash.com/photos/m3m-lnR90uM" class="card-img-top" alt="car">
+  <div class="card-body">
+    <h5 class="card-title">${item.title}</h5>
+    <p class="card-text">${item.description}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+`
+        })
+
+
+
+
+        app.innerHTML = htmlTags;
+
+    </script>
+</body>
+
+</html>
