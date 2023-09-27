@@ -24,7 +24,7 @@
         function deleteSpaces(str) {
             let iter = str.slice(0);
             for (let i = 0; i < str.length; i++) {
-                if (iter.startsWith(" ") == true) {
+                if (iter.startsWith(" ")) {
                     iter = str.slice(i)
                 } else {
                     break;
@@ -33,13 +33,13 @@
 
             let iterEnds = iter.slice(0);
             for (let k = iterEnds.length - 1; k >= 0; k--) {
-                if (iterEnds.endsWith(" ") == true) {
+                if (iterEnds.endsWith(" ")) {
                     iterEnds = iter.slice(0, k + 1)
                 } else {
                     break;
                 }
             }
-            return console.log("no spaces" + iterEnds + "no spaces");
+            console.log("no spaces" + iterEnds + "no spaces");
 
         }
         deleteSpaces(str);

@@ -26,7 +26,7 @@
 
         // // в консоль выводится строка ""<P>Вкусные M&amp;M&apos;s</P>"""
         function buildWrapper(tag) {
-            return (text, style) => {
+            return (text, attribute) => {
                 let string = "";
                 const dict = {
                     ">": "&gt;",
@@ -43,36 +43,34 @@
                         string += char;
                     }
                 }
-                const entries = Object.entries(style);
+                const entries = Object.entries(attribute);
                 let splitedEntries = [];
                 entries.forEach(elem => {
-                    let stringStyle = "";           // строка, в которую записываем измененную строку style без символов в словаре
+                    let stringAttribute = "";           // строка, в которую записываем измененную строку attribute без символов в словаре
                     let splitItem = elem.join(",").split("");   // разбиваем элементы массива entries по буквам, чтобы изменить символы из dict
                     for (let letter of splitItem) {
                         if (letter in dict) {
-                            stringStyle += dict[letter];
+                            stringAttribute += dict[letter];
                         } else {
-                            stringStyle += letter;
+                            stringAttribute += letter;
                         }
                     }
-                    const stringStyleElem = stringStyle.split(",")  // после выполнения цикла получаем измененную строку stringStyle, которая в начале цикл была пустой строкой и ее разбиваем на массивы
-                    console.log(stringStyleElem + " ======stringstyleelem")
-                    splitedEntries.push([stringStyleElem])   // заполняем пустой массив splitedEntries [строкой stringStyleElem]
+                    const stringAttributeElem = stringAttribute.split(",")  // после выполнения цикла получаем измененную строку stringAttribute, которая в начале цикл была пустой строкой и ее разбиваем на массивы
+                    console.log(stringAttributeElem + " ======stringstyleelem")
+                    splitedEntries.push([stringAttributeElem])   // заполняем пустой массив splitedEntries [строкой stringAttributeElem]
                 })
                 console.log(splitedEntries);
-                const stylized = splitedEntries.reduce((acc, val, i) => {
+                const attributes = splitedEntries.reduce((acc, val, i) => {
                     let values = val[0][0] + "=" + "'" + val[0][1] + "'"
                     return acc + values;
                 }, "")
 
-                return `<${tag} ${stylized}>${string}</${tag}>`;
+                return `<${tag} ${attributes}>${string}</${tag}>`;
             }
         };
 
-        const wrapH1 = buildWrapper("h1");
-        const wrapP = buildWrapper("p");
-        console.log(wrapH1("СТИХИ", { lang: "ru" }));
-        console.log(wrapP("Однажды в студёную зимнюю пору", { align: "center", title: "M&M's" }));
+        console.log(buildWrapper("h1")("СТИХИ", { lang: "ru" }));
+        console.log(buildWrapper("p")("Однажды в студёную зимнюю пору", { align: "center", title: "M&M's" }));
 
     </script>
 </body>

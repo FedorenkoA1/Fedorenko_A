@@ -17,14 +17,17 @@
         // Спросить у пользователя год.Отобразить пользователю соответствующий году век."
         let getYear = Number(prompt("Введите год"));
         function getCentury(getYear) {
-            function rounds(n, m) {
-                return Math.ceil(n / m);
-            }
 
-            return console.log("Это " + rounds(getYear, 100) + " век");
+            return rounds(getYear, 100);
 
         }
-        getCentury(getYear);
+
+        function rounds(n, m) {
+            return Math.ceil(n / m);
+        }
+
+        const result = getCentury(getYear);
+        console.log(`Это ${result} век`);
 
     </script>
 </body>
