@@ -1,6 +1,6 @@
 function DrinkHashFunc() {
     var self = this;
-    var HashStorage = {
+    var hashStorage = {
         "Mochito": {
             alco: "true",
             recipe: `1)Place mint leaves and 1 lime wedge into a sturdy glass.2)Add remaining lime wedges and 2 tablespoons sugar, and muddle again to release the lime juiceFill the glass almost to the top with ice.<br>3)Pour in rum and fill the glass with club soda. 3)Stir, taste, and add more sugar if desired.`
@@ -11,15 +11,15 @@ function DrinkHashFunc() {
         }
     }
     self.addValue = function (key, alco, recipe) {
-        HashStorage[key] = {
+        hashStorage[key] = {
             alco: alco,
             recipe: recipe
         };
     };
 
     self.getValue = function (key) {
-        if (key in HashStorage) {
-            console.log(HashStorage[key]);
+        if (key in hashStorage) {
+            console.log(hashStorage[key]);
         } else {
             if (key != null) {
                 console.log("There is no specified drink here");
@@ -27,15 +27,15 @@ function DrinkHashFunc() {
         }
     }
     self.deleteValue = function (key) {
-        if (key in HashStorage) {
-            delete HashStorage[key]
+        if (key in hashStorage) {
+            delete hashStorage[key]
             return console.log("The drink was deleted successfully");
         } else {
             return console.log("There is no specified drink here");
         }
     }
     self.getKeys = function () {
-        console.log(Object.keys(HashStorage));
+        console.log(Object.keys(hashStorage));
     }
 }
 
