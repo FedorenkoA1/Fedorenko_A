@@ -47,7 +47,7 @@ var button3 = document.querySelector("#button-3");
 var button4 = document.querySelector("#button-4");
 button1.addEventListener("click", () => {
     var key = prompt("Enter the name of the drink");
-    if (key == null) { return; }
+    if (!key) { return; }
     var alco = confirm("Is it contain alcohol");
     var recipe = prompt("Recipe of the drink");
     drink.addValue(key, alco, recipe);
