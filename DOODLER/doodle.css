@@ -8,14 +8,14 @@ body {
 
 
 #canvas {
-    width: 30.879vw;
+    width: 65vw;
     /* 474px; */
     height: 100vh;
     /* 707px; */
     display: block;
     margin: -1.132vh auto 2vh auto;
-    background-image: url(klipartz.com.png);
-    background-size: 150% 100%;
+    background-image: url(jungle-image.jpg);
+    background-size: 180% 100%;
     background-position: 27%;
     background-repeat: no-repeat center;
     overflow: hidden;

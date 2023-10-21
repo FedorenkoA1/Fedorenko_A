@@ -1,19 +1,19 @@
-const vw = window.innerWidth / 100;
-const vh = window.innerHeight / 100;
-console.log(window.innerWidth)
-console.log(window.innerHeight)
+const vw = document.querySelector("#canvas").clientWidth / 100;
+const vh = document.querySelector("#canvas").clientHeight / 100;
 
 
 // global variables for canvas
 let canvas;
-const canvasWidth = 30.879 * vw;
-const canvasHeight = 100 * vh;
+const canvasWidth = document.querySelector("#canvas").clientWidth;
+const canvasHeight = document.querySelector("#canvas").clientHeight;
+console.log(canvasWidth)
+console.log(canvasHeight)
 let ctx;
 
 //doodler in details 
-const doodlerWidth = 4 * vw;
+const doodlerWidth = 3 * vw;
 const doodlerHeight = 9 * vh;
-let doodlerXPositionInCanvas = canvasWidth / (0.130 * vw) - doodlerWidth / (0.130 * vh);
+let doodlerXPositionInCanvas = canvasWidth / 2 - doodlerWidth / 2;
 let doodlerYPositionInCanvas = canvasHeight * 6 / 8 - doodlerHeight / 2;
 let doodlerImageLeft;
 let doodlerImageRight;
@@ -28,8 +28,8 @@ let doodlerObject = {
 
 //image of platform
 let platformImage;
-let platformWidth = 4.849 * vw;
-let platformHeight = 2.894 * vh;
+let platformWidth = vw;
+let platformHeight = 3 * vh;
 
 //doodler's physics
 let directionX = 0.262 * vw; // doodler's x axis speed
@@ -109,7 +109,7 @@ function render() {
 
     for (let platformItem of arrOfPlatforms) {
         if (directionY < 0 && doodlerObject.y < canvasHeight * 3 / 4) {
-            platformItem.y -= initialDirectionY + 0.724 * vh; //in every iteration down platform's "y" axe coordinate to slide it
+            platformItem.y -= initialDirectionY + 5; //in every iteration down platform's "y" axe coordinate to slide it
         }
         if (checkTheCollision(doodlerObject, platformItem) && directionY > 0) {
             directionY = initialDirectionY;
@@ -128,7 +128,7 @@ function createPlatforms() {
     let platform = {
         img: platformImage,
         x: canvas.width / 2,
-        y: canvas.height - (6 * vh),
+        y: canvas.height - 40,
         width: platformWidth,
         height: platformHeight
     }
@@ -137,7 +137,7 @@ function createPlatforms() {
 
     // create 7 random platforms
     for (let i = 0; i < 7; i++) {
-        let randomX = Math.floor(Math.random() * (canvas.width - 5 * vw));
+        let randomX = Math.floor(Math.random() * (canvas.width - 2 * vw));
 
         let platform = {
             img: platformImage,
