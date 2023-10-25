@@ -1,22 +1,25 @@
 body {
-    background-image: url(Untitled-8-01.png);
+    background-image: url(images/Untitled-8-01.png);
     overflow: hidden;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 124%;
     display: block;
 }
 
 
 #canvas {
-    width: 65vw;
+    width: 70vw;
     /* 474px; */
     height: 100vh;
     /* 707px; */
     display: block;
     margin: -1.132vh auto 2vh auto;
-    background-image: url(jungle-image.jpg);
+    background-image: url(images/jungle-image.jpg);
     background-size: 180% 100%;
     background-position: 27%;
-    background-repeat: no-repeat center;
+    background-repeat: no-repeat;
     overflow: hidden;
+    box-shadow: 5px 3px 10px 7px rgb(255, 255, 255),
+        0px 0px 0px 0px,
+        -5px -3px 10px 7px rgb(255, 255, 255);
 }
