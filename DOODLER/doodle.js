@@ -1,14 +1,15 @@
 // global variables for canvas
-let canvas
-let ctx
+let canvas;
+let ctx;
 setUpCanvas();
+let audio = new Audio('./audio/I Show The Meat.mp3');
+let elem = document.querySelector(".wrapper button");
 
-window.addEventListener("resize", setUpCanvas)
-
+console.log(elem)
 console.log(canvas)
 //doodler in details 
 const doodlerWidth = canvas.width / 12;
-const doodlerHeight = canvas.height / 8;
+const doodlerHeight = canvas.height / 9;
 
 
 let doodlerXPositionInCanvas = canvas.width / 2 - doodlerWidth / 2;
@@ -29,7 +30,9 @@ let doodlerObject = {
 //image of platform
 let platformImage;
 let platformWidth = canvas.width / 9;
-let platformHeight = canvas.height / 22;
+let platformHeight = canvas.height / 21;
+
+let arrOfPlatforms = []; // here we will storecoordinatea and images of our platforms
 
 //doodler's physics
 let directionX = canvas.width / 179.17; // doodler's x axis speed
@@ -37,13 +40,15 @@ let directionY = 0; // doodler's y axis speed
 let initialDirectionY = -12; // doodler's direction
 let gravity = 0.4; // so that imitate real jump
 
-let arrOfPlatforms = []; // here we will storecoordinatea and images of our platforms
+
 
 let score = 0; // here we will stock the ultimate score 
 let maxScore = 0; // here we will stock the temporary score
 
+let gameOver = false; // here will display the state of our game
 
-//let soundBool = false;
+let pressed = {};
+
 
 //using "window onload" we check if all styles, pictures and files were downloaded
 window.onload = () => {
@@ -65,37 +70,50 @@ window.onload = () => {
     createPlatforms();
     directionY = initialDirectionY;
     window.requestAnimationFrame(render);
+    elem.addEventListener("click", startGame);
+    elem.addEventListener("click", soundPlay);
+    //we add the listeners to track keyboard pressings
+    document.addEventListener("keydown", (e) => {
+        pressed[e.code] = true;
+        console.log(pressed)
+    });
+    document.addEventListener("keyup", (e) => {
+        pressed[e.code] = false;
+    });
+    window.addEventListener("click", restart)
 }
 
 
-console.log(canvas)
-//we add the listeners to track keyboard pressings
-let pressed = {};
-document.addEventListener("keydown", (e) => {
-    pressed[e.code] = true;
-});
-document.addEventListener("keyup", (e) => {
-    pressed[e.code] = false;
-});
+
+
+
+
 
 //set the audio if (doodlerObject.y + doodlerHeight <= canvasHeight)
 
 
-
 //rendeer function using which we will animate the doodler
 function render() {
-    window.addEventListener("click", soundPlay)
+    window.addEventListener("resize", setUpCanvas);
+    if (doodlerObject.y > canvas.height) {
+        gameOver = true;
+    }
     window.requestAnimationFrame(render);
+
+    if (gameOver) {
+        return;
+    }
     ctx.clearRect(0, 0, canvas.width, canvas.height); //every iteration we will clear the canvas
     if (pressed["ArrowLeft"] || pressed["KeyA"]) {
         doodlerObject.x -= directionX;
         doodlerObject.img = doodlerImageLeft;
-    }
-    if (pressed["ArrowRight"] || pressed["KeyD"]) {
+    } else if (pressed["ArrowRight"] || pressed["KeyD"]) {
         doodlerObject.x += directionX;
         doodlerObject.img = doodlerImageLeft;
         doodlerObject.img = doodlerImageRight;
     }
+
+
 
     directionY += gravity;
     doodlerObject.y += directionY;
@@ -105,7 +123,9 @@ function render() {
     } else if (doodlerObject.x + doodlerWidth < 0) {
         doodlerObject.x = canvas.width;
     }
-
+    if (doodlerObject.y > canvas.height) {
+        gameOver = true;
+    }
     ctx.drawImage(doodlerObject.img, doodlerObject.x, doodlerObject.y, doodlerWidth, doodlerHeight);
 
     //function which will check the collision between doodler and platform
@@ -134,13 +154,25 @@ function render() {
     }
     // we create the score
     scoreUpdate();
-    ctx.fillStyle = "white";
-    ctx.font = "40px sans-serif";
+    ctx.fillStyle = "yellow";
+    ctx.font = "4vw sans-serif";
     ctx.fillText(score, 9, 60);
+    ctx.font = "3vw bold";
+    ctx.fillStyle = "white";
+    if (gameOver) {
+        loseAudio();
+        ctx.fillText(`Нажми на экран если НИДЖАТ`,
+            canvas.width / 4, canvas.height / 2);
+        ctx.fillText(` лучший игрок ФК Тотал`,
+            canvas.width / 3.5, canvas.height / 1.5)
+    }
 }
+
+
 
 //create platform
 function createPlatforms() {
+    arrOfPlatforms = []; // here we will storecoordinatea and images of our platforms
     let platform = {
         img: platformImage,
         x: canvas.width / 2,
@@ -151,6 +183,7 @@ function createPlatforms() {
     arrOfPlatforms.push(platform);
 
 
+
     // create 7 random platforms
     for (let i = 0; i < 7; i++) {
         let randomX = Math.floor(Math.random() * (canvas.width - 90));
@@ -158,15 +191,37 @@ function createPlatforms() {
         let platform = {
             img: platformImage,
             x: randomX,
-            y: canvas.height - 100 * i - 130,  // 72*i to remain space berween each of platform
+            y: canvas.height - (canvas.height / 8) * i - (canvas.height / 7.5),  // 100*i to remain space berween each of platform
             width: platformWidth,
             height: platformHeight
         }
         arrOfPlatforms.push(platform)
 
     }
+}
 
 
+function restart() {
+    if (gameOver) {
+        console.log(gameOver)
+        doodlerObject = {
+            x: doodlerXPositionInCanvas,
+            y: doodlerYPositionInCanvas,
+            width: doodlerWidth,
+            height: doodlerHeight,
+            img: doodlerImageRight
+        }
+        directionX = canvas.width / 179.17;
+        directionY = initialDirectionY;
+        score = 0;
+        maxScore = 0;
+        gameOver = false;
+        createPlatforms();
+        audio.pause();
+        audio = new Audio('./audio/I Show The Meat.mp3');
+        soundPlay();
+
+    }
 }
 
 function setUpCanvas() {
@@ -208,14 +263,30 @@ function scoreUpdate() {
         maxScore -= points;
     }
 }
+function startGame() {
+    setUpCanvas();
+    toggleScreen(".wrapper", false);
+    toggleScreen(".canvas", true);
+    doodlerObject.x = doodlerXPositionInCanvas;
+    doodlerObject.y = doodlerYPositionInCanvas;
+    score = 0;
 
+}
 
 function soundPlay() {
-    const audio = new Audio('./audio/I Show The Meat.mp3');
-    audio.play();
+
     audio.loop = true;
+    audio.play();
 }
-function soundPause() {
-    const audio = new Audio('./audio/i-show-the-meat-made-with-Voicemod-technology.mp3');
+
+
+function loseAudio() {
+    const loseMusic = new Audio("./audio/loseSound2.mp3");
     audio.pause();
+    loseMusic.play();
+}
+function toggleScreen(group, toggle) {
+    elem = document.querySelector(group);
+    let display = toggle ? "block" : "none";
+    elem.style.display = display
 }
