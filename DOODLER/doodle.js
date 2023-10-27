@@ -49,6 +49,9 @@ let gameOver = false; // here will display the state of our game
 
 let pressed = {};
 
+let nameOfThePlayer;
+let playerWithHighestScore
+let maxResult = 0;
 
 //using "window onload" we check if all styles, pictures and files were downloaded
 window.onload = () => {
@@ -70,12 +73,12 @@ window.onload = () => {
     createPlatforms();
     directionY = initialDirectionY;
     window.requestAnimationFrame(render);
+    rememberThePlayer();
     elem.addEventListener("click", startGame);
     elem.addEventListener("click", soundPlay);
     //we add the listeners to track keyboard pressings
     document.addEventListener("keydown", (e) => {
         pressed[e.code] = true;
-        console.log(pressed)
     });
     document.addEventListener("keyup", (e) => {
         pressed[e.code] = false;
@@ -160,10 +163,12 @@ function render() {
     ctx.font = "3vw bold";
     ctx.fillStyle = "white";
     if (gameOver) {
+        saveData();
+        getMaxResult()
         loseAudio();
-        ctx.fillText(`Нажми на экран если НИДЖАТ`,
+        ctx.fillText(`The best score is ${playerWithHighestScore}: ${maxResult}`,
             canvas.width / 4, canvas.height / 2);
-        ctx.fillText(` лучший игрок ФК Тотал`,
+        ctx.fillText(`Click on the screen to restart`,
             canvas.width / 3.5, canvas.height / 1.5)
     }
 }
@@ -191,7 +196,7 @@ function createPlatforms() {
         let platform = {
             img: platformImage,
             x: randomX,
-            y: canvas.height - (canvas.height / 8) * i - (canvas.height / 7.5),  // 100*i to remain space berween each of platform
+            y: canvas.height - (canvas.height / 8) * i - (canvas.height / 7),  // 100*i to remain space berween each of platform
             width: platformWidth,
             height: platformHeight
         }
@@ -289,4 +294,38 @@ function toggleScreen(group, toggle) {
     elem = document.querySelector(group);
     let display = toggle ? "block" : "none";
     elem.style.display = display
+}
+
+function rememberThePlayer() {
+    const buttonForSave = document.querySelector(".save");
+    buttonForSave.addEventListener("click", () => {
+        nameOfThePlayer = document.querySelector(".user_name").value
+    });
+}
+
+function saveData() {
+    if (localStorage.scoreData) {
+        const localStorageScore = JSON.parse(localStorage.scoreData);
+        localStorageScore.push({
+            nameOfThePlayer, score
+        })
+        localStorage['scoreData'] = JSON.stringify(localStorageScore);
+    } else {
+        const personsDataArr = [];
+        personsDataArr.push({
+            nameOfThePlayer, score
+        })
+
+        localStorage['scoreData'] = JSON.stringify(personsDataArr);
+    }
+};
+function getMaxResult() {
+    const arr = JSON.parse(localStorage.scoreData);
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i]["score"] > maxResult) {
+            maxResult = arr[i]["score"];
+            playerWithHighestScore = arr[i]["nameOfThePlayer"];
+        }
+
+    }
 }
