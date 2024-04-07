@@ -1,0 +1,78 @@
+body {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(6, 71, 162, 1) 46%, rgba(0, 212, 255, 1) 100%);
+}
+
+
+
+
+
+.container {
+    width: 42em;
+    height: 42em;
+    background-color: blanchedalmond;
+    box-shadow: 10px 10px 29px rgb(24, 122, 163),
+        0px 30px 30px rgb(24, 122, 163),
+        0px -10px 14px 5px rgb(24, 122, 163);
+    position: relative;
+    overflow: hidden;
+}
+
+.big_circle {
+    width: 25rem;
+    height: 25rem;
+    background-color: aqua;
+    border-radius: 50%;
+    position: absolute;
+    left: -80px;
+    top: -80px;
+
+}
+
+.small_circle {
+    width: 6.25rem;
+    height: 6.25rem;
+    background-color: aqua;
+    border-radius: 50%;
+    position: absolute;
+    left: 330px;
+    top: 219px;
+    z-index: 5;
+}
+
+.rectangle_long {
+    width: 34rem;
+    height: 2.5rem;
+    background-color: rgb(173, 27, 39);
+    position: absolute;
+    left: 39px;
+    top: 240px;
+    transform: rotateZ(36deg);
+}
+
+.rectangle_with_b_r {
+    width: 25rem;
+    height: 6rem;
+    background-color: rgb(180, 29, 170);
+    position: absolute;
+    left: 133px;
+    top: 410px;
+    border-radius: 25px;
+}
+
+.triangle {
+    position: absolute;
+    left: 523px;
+    top: 54px;
+    width: 0;
+    height: 0;
+    border-left: 93px solid transparent;
+    border-right: 118px solid transparent;
+    border-bottom: 105px solid red;
+    transform: rotateZ(-221deg);
+}
